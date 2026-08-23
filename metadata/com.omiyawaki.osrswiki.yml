@@ -1,63 +1,53 @@
-# Build metadata for com.omiyawaki.osrswiki
-# Store listing Summary/Description live in upstream fastlane:
-# https://github.com/osrswiki/osrswiki-android/tree/main/fastlane/metadata/android
-# Field names follow https://f-droid.org/docs/Build_Metadata_Reference/
-
 AntiFeatures:
   NonFreeNet:
-    en-US: Loads content from the Old School RuneScape Wiki and related community APIs.
-
+    en-US: Loads content from the Old School RuneScape Wiki and related community
+      APIs.
 Categories:
   - Internet
   - Reading
-
 License: GPL-3.0-or-later
-
 AuthorName: Osamu Miyawaki
 AuthorEmail: contact.omiyawaki@gmail.com
-
 WebSite: https://oldschool.runescape.wiki/
-
 SourceCode: https://github.com/osrswiki/osrswiki-android
 IssueTracker: https://github.com/osrswiki/osrswiki-android/issues
 Donate: https://github.com/sponsors/omiyawaki
 
+AutoName: OSRS Wiki
+
 RepoType: git
 Repo: https://github.com/osrswiki/osrswiki-android.git
 
-AutoName: OSRS Wiki
-
-MaintainerNotes: |-
-    Build from public osrswiki-android repo root (gradlew at root).
-
-    Flavor: distribution=foss (productFlavors play|foss).
-    Explicit task: ./gradlew :app:assembleFossRelease
-    F-Droid gradle: [foss] runs assembleFossRelease.
-
-    Expected APK (unsigned on buildserver):
-      app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
-
-    Notes:
-      - SpeechRecognizer is optional platform API; not a proprietary dependency.
-      - No Play Billing / billingclient on fossRuntimeClasspath.
-      - Charts: Chart.js (MIT), not Highcharts.
-      - applicationId is com.omiyawaki.osrswiki (same as Play).
-      - Store listing copy: upstream fastlane/metadata/android/.
-
 Builds:
-  - versionName: '2.0.0'
+  - versionName: 2.0.0
     versionCode: 36
     commit: dc0317f4fca2b838f4b34e3b485636b2f6636ae7
     sudo:
       - apt-get update
-      - apt-get install -y openjdk-17-jdk-headless
-      - update-alternatives --auto java
+      - apt-get install -y openjdk-21-jdk-headless
+      - update-java-alternatives -a
     gradle:
       - foss
     output: app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
 
+MaintainerNotes: |-
+  Build from public osrswiki-android repo root (gradlew at root).
+
+  Flavor: distribution=foss (productFlavors play|foss).
+  Explicit task: ./gradlew :app:assembleFossRelease
+  F-Droid gradle: [foss] runs assembleFossRelease.
+
+  Expected APK (unsigned on buildserver):
+    app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
+
+  Notes:
+    - SpeechRecognizer is optional platform API; not a proprietary dependency.
+    - No Play Billing / billingclient on fossRuntimeClasspath.
+    - Charts: Chart.js (MIT), not Highcharts.
+    - applicationId is com.omiyawaki.osrswiki (same as Play).
+    - Store listing copy: upstream fastlane/metadata/android/.
+
 AutoUpdateMode: None
 UpdateCheckMode: None
-
-CurrentVersion: '2.0.0'
+CurrentVersion: 2.0.0
 CurrentVersionCode: 36
