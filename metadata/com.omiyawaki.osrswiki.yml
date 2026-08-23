@@ -1,0 +1,78 @@
+# Fleet source of truth for F-Droid packaging metadata.
+# Upstream layout after submission: metadata/com.omiyawaki.osrswiki.yml in fdroiddata
+# (canonical MR target: https://gitlab.com/fdroid/fdroiddata — GitHub is a mirror).
+# Field names follow https://f-droid.org/docs/Build_Metadata_Reference/
+
+AntiFeatures:
+  NonFreeNet:
+    en-US: Loads content from the Old School RuneScape Wiki and related community APIs.
+
+Categories:
+  - Internet
+  - Reading
+
+License: GPL-3.0-or-later
+
+AuthorName: Osamu Miyawaki
+AuthorEmail: contact.omiyawaki@gmail.com
+
+WebSite: https://oldschool.runescape.wiki/
+
+SourceCode: https://github.com/osrswiki/osrswiki-android
+IssueTracker: https://github.com/osrswiki/osrswiki-android/issues
+
+RepoType: git
+Repo: https://github.com/osrswiki/osrswiki-android.git
+
+AutoName: OSRS Wiki
+
+Summary: Unofficial Old School RuneScape wiki reader
+Description: |-
+    Unofficial client for the Old School RuneScape Wiki. Browse articles,
+    search, read offline, and view the game map.
+
+    This F-Droid package is the foss distribution flavor: no Google Play
+    Billing, and Grand Exchange charts use Chart.js (MIT) rather than
+    Highcharts.
+
+    Network: the app loads content from the public wiki and related
+    community APIs (NonFreeNet). Voice search uses the optional Android
+    SpeechRecognizer platform API when available and degrades when it is
+    not.
+
+    Tips: the foss build does not include Play Billing / in-app purchases.
+    Support development via GitHub Sponsors: https://github.com/sponsors/omiyawaki
+
+MaintainerNotes: |-
+    Build from public osrswiki-android repo root (gradlew at root).
+
+    Flavor: distribution=foss (productFlavors play|foss).
+    Explicit task: ./gradlew :app:assembleFossRelease
+    F-Droid gradle: [foss] runs assembleFossRelease.
+
+    Expected APK (unsigned on buildserver):
+      app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
+
+    Notes:
+      - SpeechRecognizer is optional platform API; not a proprietary dependency.
+      - No Play Billing / billingclient on fossRuntimeClasspath.
+      - Charts: Chart.js (MIT), not Highcharts.
+      - applicationId is com.omiyawaki.osrswiki (same as Play).
+
+Builds:
+  - versionName: '2.0.0'
+    versionCode: 36
+    commit: dc0317f4fca2b838f4b34e3b485636b2f6636ae7
+    sudo:
+      - apt-get update
+      - apt-get install -y openjdk-17-jdk-headless
+      - update-alternatives --auto java
+    gradle:
+      - foss
+    output: app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
+
+AutoUpdateMode: None
+UpdateCheckMode: None
+
+CurrentVersion: '2.0.0'
+CurrentVersionCode: 36
