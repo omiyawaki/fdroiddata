@@ -17,37 +17,38 @@ AutoName: OSRS Wiki
 
 RepoType: git
 Repo: https://github.com/osrswiki/osrswiki-android.git
+Binaries: https://github.com/osrswiki/osrswiki-android/releases/download/v%v/app-foss-release.apk
 
 Builds:
-  - versionName: 2.0.0
-    versionCode: 36
-    commit: dc0317f4fca2b838f4b34e3b485636b2f6636ae7
-    sudo:
-      - apt-get update
-      - apt-get install -y openjdk-21-jdk-headless
-      - update-java-alternatives -a
+  - versionName: 2.0.1
+    versionCode: 39
+    commit: 1bda68d1df4f7baea188e90ae8bd92c91bcda189
+    subdir: app
     gradle:
       - foss
-    output: app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
+
+AllowedAPKSigningKeys: 27bd896eeefe8f1e831d3113ddb159c637af4f76fb9ef161caceba18d57f1f43
 
 MaintainerNotes: |-
-  Build from public osrswiki-android repo root (gradlew at root).
+  Build from public osrswiki-android repo root (gradlew at root; app in
+  subdir app).
 
   Flavor: distribution=foss (productFlavors play|foss).
   Explicit task: ./gradlew :app:assembleFossRelease
-  F-Droid gradle: [foss] runs assembleFossRelease.
+  F-Droid gradle: [foss] with subdir app runs assembleFossRelease.
 
-  Expected APK (unsigned on buildserver):
-    app/build/outputs/apk/foss/release/app-foss-release-unsigned.apk
+  Reproducible: Binaries from GitHub Releases (v%v/app-foss-release.apk)
+  with AllowedAPKSigningKeys.
 
   Notes:
     - SpeechRecognizer is optional platform API; not a proprietary dependency.
     - No Play Billing / billingclient on fossRuntimeClasspath.
     - Charts: Chart.js (MIT), not Highcharts.
     - applicationId is com.omiyawaki.osrswiki (same as Play).
-    - Store listing copy: upstream fastlane/metadata/android/.
+    - Store listing copy + images: upstream fastlane/metadata/android/.
+    - MapLibre sanitizer is vendored at undergroundmaps/sanitize_osrs_maplibre_aar.py.
 
-AutoUpdateMode: None
-UpdateCheckMode: None
-CurrentVersion: 2.0.0
-CurrentVersionCode: 36
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 2.0.1
+CurrentVersionCode: 39
