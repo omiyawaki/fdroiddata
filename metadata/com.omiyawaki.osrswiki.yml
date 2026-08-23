@@ -1,6 +1,6 @@
-# Fleet source of truth for F-Droid packaging metadata.
-# Upstream layout after submission: metadata/com.omiyawaki.osrswiki.yml in fdroiddata
-# (canonical MR target: https://gitlab.com/fdroid/fdroiddata — GitHub is a mirror).
+# Build metadata for com.omiyawaki.osrswiki
+# Store listing Summary/Description live in upstream fastlane:
+# https://github.com/osrswiki/osrswiki-android/tree/main/fastlane/metadata/android
 # Field names follow https://f-droid.org/docs/Build_Metadata_Reference/
 
 AntiFeatures:
@@ -20,28 +20,12 @@ WebSite: https://oldschool.runescape.wiki/
 
 SourceCode: https://github.com/osrswiki/osrswiki-android
 IssueTracker: https://github.com/osrswiki/osrswiki-android/issues
+Donate: https://github.com/sponsors/omiyawaki
 
 RepoType: git
 Repo: https://github.com/osrswiki/osrswiki-android.git
 
 AutoName: OSRS Wiki
-
-Summary: Unofficial Old School RuneScape wiki reader
-Description: |-
-    Unofficial client for the Old School RuneScape Wiki. Browse articles,
-    search, read offline, and view the game map.
-
-    This F-Droid package is the foss distribution flavor: no Google Play
-    Billing, and Grand Exchange charts use Chart.js (MIT) rather than
-    Highcharts.
-
-    Network: the app loads content from the public wiki and related
-    community APIs (NonFreeNet). Voice search uses the optional Android
-    SpeechRecognizer platform API when available and degrades when it is
-    not.
-
-    Tips: the foss build does not include Play Billing / in-app purchases.
-    Support development via GitHub Sponsors: https://github.com/sponsors/omiyawaki
 
 MaintainerNotes: |-
     Build from public osrswiki-android repo root (gradlew at root).
@@ -58,6 +42,7 @@ MaintainerNotes: |-
       - No Play Billing / billingclient on fossRuntimeClasspath.
       - Charts: Chart.js (MIT), not Highcharts.
       - applicationId is com.omiyawaki.osrswiki (same as Play).
+      - Store listing copy: upstream fastlane/metadata/android/.
 
 Builds:
   - versionName: '2.0.0'
