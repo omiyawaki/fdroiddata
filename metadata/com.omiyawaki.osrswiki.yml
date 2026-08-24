@@ -17,7 +17,8 @@ AutoName: OSRS Wiki
 
 RepoType: git
 Repo: https://github.com/osrswiki/osrswiki-android.git
-Binaries: https://github.com/osrswiki/osrswiki-android/releases/download/v%v/app-foss-release.apk
+Binaries: 
+  https://github.com/osrswiki/osrswiki-android/releases/download/v%v/app-foss-release.apk
 
 Builds:
   - versionName: 2.0.1
@@ -26,6 +27,24 @@ Builds:
     subdir: app
     gradle:
       - foss
+    prebuild:
+      - mkdir -p src/main/assets
+      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_0.mbtiles
+        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_0.mbtiles
+      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_1.mbtiles
+        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_1.mbtiles
+      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_2.mbtiles
+        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_2.mbtiles
+      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_3.mbtiles
+        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_3.mbtiles
+      - echo '8abc2cbe5c25cbdb70ac00d763d6560b7544a1befa7546d7cc67205273e22cea  src/main/assets/map_floor_0.mbtiles'
+        | sha256sum -c -
+      - echo '130a98d27f069d76c2b902968c7c62892ca9046d5172103506d0487984b45e07  src/main/assets/map_floor_1.mbtiles'
+        | sha256sum -c -
+      - echo '43f1fbf54377d39c5523884fc8d406adbec48178c46bede05000388116e7e36b  src/main/assets/map_floor_2.mbtiles'
+        | sha256sum -c -
+      - echo '208fd6907e9746ec849cc7f51ae09bb9cf037b3b4eca044b825d19af676a8b05  src/main/assets/map_floor_3.mbtiles'
+        | sha256sum -c -
 
 AllowedAPKSigningKeys: 27bd896eeefe8f1e831d3113ddb159c637af4f76fb9ef161caceba18d57f1f43
 
@@ -36,6 +55,11 @@ MaintainerNotes: |-
   Flavor: distribution=foss (productFlavors play|foss).
   Explicit task: ./gradlew :app:assembleFossRelease
   F-Droid gradle: [foss] with subdir app runs assembleFossRelease.
+
+  Map mbtiles are immutable release assets (not in git). prebuild downloads
+  the pinned set from osrswiki/osrswiki-tooling map-assets-v1-949feadd10f7
+  into src/main/assets and sha256-checks them (same pins as
+  map-assets-manifest.json / ./scripts/fetch-map-assets.sh materialize).
 
   Reproducible: Binaries from GitHub Releases (v%v/app-foss-release.apk)
   with AllowedAPKSigningKeys.
@@ -48,7 +72,7 @@ MaintainerNotes: |-
     - Store listing copy + images: upstream fastlane/metadata/android/.
     - MapLibre sanitizer is vendored at undergroundmaps/sanitize_osrs_maplibre_aar.py.
 
-AutoUpdateMode: Version v%v
+AutoUpdateMode: Version
 UpdateCheckMode: Tags
 CurrentVersion: 2.0.1
 CurrentVersionCode: 39
