@@ -23,7 +23,7 @@ Binaries:
 Builds:
   - versionName: 2.0.1
     versionCode: 39
-    commit: 1bda68d1df4f7baea188e90ae8bd92c91bcda189
+    commit: fbe80d4e4ae20470cc007318592009749c0255bc
     subdir: app
     gradle:
       - foss
