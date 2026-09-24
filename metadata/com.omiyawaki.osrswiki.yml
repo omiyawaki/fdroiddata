@@ -29,14 +29,12 @@ Builds:
       - foss
     prebuild:
       - mkdir -p src/main/assets
-      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_0.mbtiles
-        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_0.mbtiles
-      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_1.mbtiles
-        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_1.mbtiles
-      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_2.mbtiles
-        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_2.mbtiles
-      - curl --fail --location --retry 3 --retry-all-errors -o src/main/assets/map_floor_3.mbtiles
-        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floor_3.mbtiles
+      - curl --fail --location --retry 3 --retry-all-errors -o map_floors.zip
+        https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floors.zip
+      - echo '5ec05348809fd54ccda140ae74229fb2e4ff09332940c69b4d42cdbef8d388e  map_floors.zip'
+        | sha256sum -c -
+      - unzip -o -j map_floors.zip -d src/main/assets
+      - rm -f map_floors.zip
       - echo '8abc2cbe5c25cbdb70ac00d763d6560b7544a1befa7546d7cc67205273e22cea  src/main/assets/map_floor_0.mbtiles'
         | sha256sum -c -
       - echo '130a98d27f069d76c2b902968c7c62892ca9046d5172103506d0487984b45e07  src/main/assets/map_floor_1.mbtiles'
