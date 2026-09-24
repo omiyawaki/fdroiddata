@@ -31,7 +31,7 @@ Builds:
       - mkdir -p src/main/assets
       - curl --fail --location --retry 3 --retry-all-errors -o map_floors.zip
         https://github.com/osrswiki/osrswiki-tooling/releases/download/map-assets-v1-949feadd10f7/map_floors.zip
-      - echo '5ec053488b09fd54ccda140ae74229fb2e4ff09332940c69b4d42cdbef8d388e  map_floors.zip'
+      - echo '169281ddcd742402abca56b5535df4310654cc6212cd399bd41e7682dfaab213  map_floors.zip'
         | sha256sum -c -
       - unzip -o -j map_floors.zip -d src/main/assets
       - rm -f map_floors.zip
